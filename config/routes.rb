@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   namespace :admin do
+    resources :users do
+      member do
+        post :to_admin
+        post :to_normal
+      end
+    end
     resources :products
     resources :orders do
       member do
@@ -8,12 +14,6 @@ Rails.application.routes.draw do
         post :ship
         post :shipped
         post :return
-      end
-    end
-    resources :users do
-      member do
-        post :to_admin
-        post :to_normal
       end
     end
   end
